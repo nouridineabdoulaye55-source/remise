@@ -18,6 +18,81 @@
         background-color: cornflowerblue;
       }
 
+      /* Navigation Bar Styles */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffd700;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a:hover {
+        color: #ffd700;
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        margin: 5px 0;
+        transition: 0.3s;
+      }
+
+      @media (max-width: 768px) {
+        .nav-menu {
+          position: fixed;
+          left: -100%;
+          top: 70px;
+          flex-direction: column;
+          background: rgba(0, 0, 0, 0.95);
+          width: 100%;
+          text-align: center;
+          transition: 0.3s;
+          gap: 1rem;
+          padding: 2rem 0;
+        }
+
+        .nav-menu.active {
+          left: 0;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+      }
+
       .hero {
         min-height: 100vh;
         display: flex;
@@ -28,6 +103,7 @@
         padding: 2rem;
         position: relative;
         overflow: hidden;
+        margin-top: 60px;
       }
 
       .particles {
@@ -380,11 +456,31 @@
         .logo {
           font-size: 2rem;
         }
+        .gallery {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="hero">
+    <!-- Navigation Bar -->
+    <nav>
+      <div class="nav-brand">🎓 DTECH GROUP</div>
+      <ul class="nav-menu">
+        <li><a href="#home">Accueil</a></li>
+        <li><a href="#countdown">Compte à Rebours</a></li>
+        <li><a href="#details">Points Forts</a></li>
+        <li><a href="#informations">Infos Pratiques</a></li>
+        <li><a href="#gallery">Galerie</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <div class="hero" id="home">
       <div class="particles" id="particles"></div>
 
       <div class="content">
@@ -513,18 +609,29 @@
       <div class="container">
         <h2>📸 Galerie</h2>
         <div class="gallery">
-          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
             <img src="image/R.png" alt="Galerie 1" />
           </div>
-          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
             <img src="image/image.png" alt="Galerie 2" />
           </div>
-          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
             <img src="image/OIP (4).jpeg" alt="Galerie 3" />
           </div>
-          
 
-          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
+          <div
+            class="gallery-item"
+            onclick="openModal(this.querySelector('img').src)"
+          >
             <img src="image/H.jpg" alt="Galerie 6" />
           </div>
         </div>
@@ -573,20 +680,68 @@
         </p>
       </div>
     </div>
-    <section style="background-color: darkgray;">
-      <div style="margin-top: 3rem; box-shadow: 0 0 10px #000; padding: 1rem">
-        <h1 style="font-size: 20px; align-items: center; text-align: center">
-          les inscription continuent pour les gens intéressés
+    <section style="background-color: darkgray; padding: 2rem">
+      <div
+        style="
+          margin-top: 3rem;
+          box-shadow: 0 0 10px #000;
+          padding: 2rem;
+          border-radius: 15px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      >
+        <h1 style="font-size: 20px; text-align: center; margin-bottom: 1rem">
+          Les inscriptions continuent pour les gens intéressés
         </h1>
-        <p style="text-align: center">93 49 85 85</p>
-<div style="display: flex; text-align: center; align-items: center;">
-            <div><p style="text-align: center">  <h3>watsapp</h3></p></div> 
-            <a href="https://wa.me/93498585">+228 93 49 85 85</a>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem">
+          93 49 85 85
+        </p>
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+          "
+        >
+          <h3 style="margin: 0">WhatsApp :</h3>
+          <a
+            href="https://wa.me/22893498585"
+            style="
+              background-color: #25d366;
+              color: white;
+              padding: 0.8rem 1.5rem;
+              border-radius: 10px;
+              text-decoration: none;
+              font-weight: bold;
+            "
+            >+228 93 49 85 85</a
+          >
+        </div>
       </div>
-</div>
     </section>
 
     <script>
+      // Menu hamburger mobile
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.querySelector(".nav-menu");
+
+      if (hamburger) {
+        hamburger.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
+        });
+
+        // Fermer le menu quand on clique sur un lien
+        document.querySelectorAll(".nav-menu a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+          });
+        });
+      }
+
       // Génération des particules animées
       const particlesContainer = document.getElementById("particles");
       for (let i = 0; i < 50; i++) {
@@ -669,7 +824,7 @@
         if (event.target == modal) {
           modal.style.display = "none";
         }
-      }
+      };
     </script>
   </body>
 </html>
