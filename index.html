@@ -254,9 +254,48 @@
         text-align: center;
       }
 
+      .info-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .info-card {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 2.5rem;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+      }
+
+      .info-card:hover {
+        transform: translateY(-10px);
+        background: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .info-card-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+      }
+
+      .info-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+        color: #ffd700;
+      }
+
+      .info-card p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
       .gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
         margin-top: 3rem;
       }
@@ -284,6 +323,48 @@
       .gallery-item:hover {
         transform: translateY(-10px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+      }
+
+      /* Styles du modal de zoom */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+
+      .modal-content {
+        margin: auto;
+        display: block;
+        width: 90%;
+        max-width: 900px;
+        max-height: 90vh;
+        object-fit: contain;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .close {
+        position: absolute;
+        top: 30px;
+        right: 45px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: #bbb;
       }
 
       @media (max-width: 768px) {
@@ -396,28 +477,64 @@
       </div>
     </div>
 
+    <div class="section" id="informations">
+      <div class="container">
+        <h2>📋 Informations Pratiques</h2>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">📍</div>
+            <h3>Lieu</h3>
+            <p>
+              Hôtel Nassam<br />
+              Sokodé, Togo
+            </p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">📅</div>
+            <h3>Date</h3>
+            <p>
+              6 Décembre 2025<br />
+              À partir de 9h00
+            </p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">🎫</div>
+            <h3>Inscription</h3>
+            <p>
+              Les inscriptions continuent<br />
+              Contactez-nous au 93 49 85 85
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="section" id="gallery">
       <div class="container">
         <h2>📸 Galerie</h2>
         <div class="gallery">
-          <div class="gallery-item">
-            <img src="image/h2.jpeg" alt="Galerie 1" />
+          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
+            <img src="image/R.png" alt="Galerie 1" />
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
             <img src="image/image.png" alt="Galerie 2" />
           </div>
-          <div class="gallery-item">
-            <img src="image/j2.jpg" alt="Galerie 3" />
+          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
+            <img src="image/OIP (4).jpeg" alt="Galerie 3" />
           </div>
-          <div class="gallery-item">
-            <img src="image/l.png" alt="Galerie 4" />
-          </div>
+          
 
-          <div class="gallery-item">
-            <img src="image/OIP (4).jpeg" alt="Galerie 6" />
+          <div class="gallery-item" onclick="openModal(this.querySelector('img').src)">
+            <img src="image/H.jpg" alt="Galerie 6" />
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Modal de zoom -->
+    <div id="imageModal" class="modal">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img class="modal-content" id="modalImage" />
     </div>
 
     <div class="section" style="display: flex">
@@ -531,6 +648,28 @@
           }
         });
       });
+
+      // Fonction pour ouvrir le modal avec zoom
+      function openModal(imageSrc) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        modal.style.display = "block";
+        modalImg.src = imageSrc;
+      }
+
+      // Fonction pour fermer le modal
+      function closeModal() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none";
+      }
+
+      // Fermer le modal au clic en dehors de l'image
+      window.onclick = function (event) {
+        const modal = document.getElementById("imageModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
     </script>
   </body>
 </html>
